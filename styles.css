@@ -1,0 +1,24 @@
+.horizontal-box {
+    border: 2px red solid;
+    width: 100%;
+    display: flex;
+}
+
+.calculator {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px green solid;
+  }
+
+.display {
+   border: 2px blue solid;
+   width: 100%;
+}
+
+button {
+    flex: 1;
+}
