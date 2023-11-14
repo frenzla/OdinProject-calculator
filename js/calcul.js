@@ -49,6 +49,7 @@ const displayZone = document.querySelector('div.display');
 const numberButtons = document.querySelectorAll('.number-button');
 const operatorButtons = document.querySelectorAll('.operator-button');
 const resultButton = document.querySelector('.result-button');
+const clearButton = document.querySelector('.clear-button');
 
 // Event trigger for number click
 numberButtons.forEach((number) => {
@@ -62,6 +63,9 @@ operatorButtons.forEach((operator) => {
 
 // Event trigger for result click
 resultButton.addEventListener('click', resultClickEvent)
+
+// Event trigger for clear click
+clearButton.addEventListener('click', clearClickEvent)
 
 // Event for operator click
 function operatorClickEvent (e) {
@@ -84,8 +88,18 @@ function numberClickEvent (e) {
     }
 };
 
+// Event for result click
 function resultClickEvent (e) {
     computeAndShowResult();
+}
+
+// Event for clear click
+function clearClickEvent (e) {
+    a = "";
+    b = "";
+    operator = "";
+    result = "";
+    displayZone.textContent = "";
 }
 
 // Store numbers
