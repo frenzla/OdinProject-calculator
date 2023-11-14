@@ -1,19 +1,29 @@
+
+// Operations functions
 function add (a,b) {
-    return a+b;
+    let equal = Number(a)+Number(b);
+    return roundNumber(equal);
 }
-
 function subtract (a,b) {
-    return a-b;
+    let equal = Number(a)-Number(b);
+    return roundNumber(equal);
 }
-
 function multiply (a,b) {
-    return a*b;
+    let equal = Number(a)*Number(b);
+    return roundNumber(equal);
 }
-
 function divide (a,b) {
-    return a/b;
+    let equal = Number(a)/Number(b);
+    return roundNumber(equal);
 }
 
+// Number rounding function
+function roundNumber (num) {
+    return (Math.round((num + Number.EPSILON) * 1000000) / 1000000);
+    //return (Number(num) % 1 != 0) ? num.toFixed(5) : num;
+}
+
+// Transform the typing in operating
 function operate (operator, a, b) {
     if (operator === "+") {
         return add(a,b);
@@ -27,3 +37,89 @@ function operate (operator, a, b) {
         return "ERROR";
     };
 };
+
+//Defining operating variables
+let a;
+let b;
+let operator;
+let result;
+
+// Selecting buttons & display
+const displayZone = document.querySelector('div.display');
+const numberButtons = document.querySelectorAll('.number-button');
+const operatorButtons = document.querySelectorAll('.operator-button');
+const resultButton = document.querySelector('.result-button');
+
+// Event trigger for number click
+numberButtons.forEach((number) => {
+    number.addEventListener('click', numberClickEvent)
+});
+
+// Event trigger for operator click
+operatorButtons.forEach((operator) => {
+    operator.addEventListener('click', operatorClickEvent)
+});
+
+// Event trigger for result click
+resultButton.addEventListener('click', resultClickEvent)
+
+// Event for operator click
+function operatorClickEvent (e) {
+    if (!operator) {
+        operator = e.target.value;
+    } else {
+        computeAndShowResult(e.target.value);
+    }
+}
+
+// Event for number click
+function numberClickEvent (e) {
+    let val = e.target.value;
+    if (!operator) {
+        storeNumber("a",val);
+        displayZone.textContent = a;
+    } else {
+        storeNumber("b",val);
+        displayZone.textContent = b;
+    }
+};
+
+function resultClickEvent (e) {
+    computeAndShowResult();
+}
+
+// Store numbers
+function storeNumber (aOrB,val) {
+    if (aOrB === "a") {
+        if (!a) {
+            a = val;
+        } else {
+            a = a+val;
+        }
+    } else {
+        if (!b) {
+            b = val;
+        } else {
+            b = b+val;
+        }
+    };
+}
+
+function computeAndShowResult(newOperator) {
+    if (!b) {
+        result = a;
+        displayZone.textContent = result;
+        return;
+    } else {
+        result = operate(operator,a,b);
+    };
+    if (newOperator) {
+        operator = newOperator;
+        a = result;
+        b = "";
+    } else {
+        a = "";
+        b = "";
+    };
+    displayZone.textContent = result;
+}
