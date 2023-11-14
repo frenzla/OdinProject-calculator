@@ -13,8 +13,13 @@ function multiply (a,b) {
     return roundNumber(equal);
 }
 function divide (a,b) {
-    let equal = Number(a)/Number(b);
-    return roundNumber(equal);
+    if (Number(b)===0) {
+        clearAll();
+        displayZone.textContent = "Can't div by 0";
+    } else {
+        let equal = Number(a)/Number(b);
+        return roundNumber(equal);
+    }
 }
 
 // Number rounding function
@@ -95,11 +100,15 @@ function resultClickEvent (e) {
 
 // Event for clear click
 function clearClickEvent (e) {
+    clearAll();
+    displayZone.textContent = "";
+}
+
+function clearAll() {
     a = "";
     b = "";
     operator = "";
     result = "";
-    displayZone.textContent = "";
 }
 
 // Store numbers
@@ -123,17 +132,15 @@ function computeAndShowResult(newOperator) {
     if (!b) {
         result = a;
         displayZone.textContent = result;
+        operator = newOperator;
         return;
     } else {
         result = operate(operator,a,b);
     };
     if (newOperator) {
         operator = newOperator;
-        a = result;
-        b = "";
-    } else {
-        a = "";
-        b = "";
     };
+    a = result;
+    b = "";
     displayZone.textContent = result;
 }
