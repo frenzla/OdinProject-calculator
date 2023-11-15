@@ -1,5 +1,4 @@
 .horizontal-box {
-    border: 2px red solid;
     width: 100%;
     display: flex;
 }
@@ -11,15 +10,44 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: 2px green solid;
   }
 
 .display {
-   border: 2px blue solid;
-   width: 100%;
+   border: 2px solid lightseagreen;
+   width: 98%;
    height: 25px;
+   line-height:25px;
 }
 
 button {
     flex: 1;
+    border: 0.5px solid grey;
+}
+
+.clear-button {
+    flex: 1 1 64px;
+}
+
+#zero {
+    flex: 1 1 64px;
+}
+
+.operator-button {
+    background-color: orange;
+}
+
+.result-button {
+    background-color: orange;
+}
+
+.backspace-button {
+    background-color: lightgrey;
+}
+
+.clear-button {
+    background-color: lightgrey;
+}
+
+.decimal-button:disabled {
+    background-color: darkslategrey;
 }

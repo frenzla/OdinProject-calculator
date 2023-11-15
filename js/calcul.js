@@ -55,6 +55,8 @@ const numberButtons = document.querySelectorAll('.number-button');
 const operatorButtons = document.querySelectorAll('.operator-button');
 const resultButton = document.querySelector('.result-button');
 const clearButton = document.querySelector('.clear-button');
+const decimalButton = document.querySelector('.decimal-button');
+const delButton = document.querySelector('.backspace-button');
 
 // Event trigger for number click
 numberButtons.forEach((number) => {
@@ -69,13 +71,26 @@ operatorButtons.forEach((operator) => {
 // Event trigger for result click
 resultButton.addEventListener('click', resultClickEvent)
 
+// Event trigger for decimal click
+decimalButton.addEventListener('click', decimalClickEvent)
+
 // Event trigger for clear click
 clearButton.addEventListener('click', clearClickEvent)
+
+// Event trigger for del click
+delButton.addEventListener('click', delClickEvent)
+
+// Event for decimal click
+function decimalClickEvent (e) {
+    decimalButton.disabled = true;
+    numberClickEvent(e);
+}
 
 // Event for operator click
 function operatorClickEvent (e) {
     if (!operator) {
         operator = e.target.value;
+        decimalButton.disabled = false;
     } else {
         computeAndShowResult(e.target.value);
     }
@@ -102,6 +117,7 @@ function resultClickEvent (e) {
 function clearClickEvent (e) {
     clearAll();
     displayZone.textContent = "";
+    decimalButton.disabled = false;
 }
 
 function clearAll() {
@@ -109,6 +125,17 @@ function clearAll() {
     b = "";
     operator = "";
     result = "";
+}
+
+// Event for del click
+function delClickEvent (e) {
+    if (!operator) {
+        a = a.slice(0,-1);
+        displayZone.textContent = a;
+    } else {
+        b = b.slice(0,-1);
+        displayZone.textContent = b;
+    }
 }
 
 // Store numbers
@@ -142,5 +169,6 @@ function computeAndShowResult(newOperator) {
     };
     a = result;
     b = "";
+    decimalButton.disabled = false;
     displayZone.textContent = result;
 }
